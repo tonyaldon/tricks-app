@@ -1,15 +1,15 @@
-import React from 'react';
-import { render } from '@testing-library/react';
+import React from 'react'
+import { render } from '@testing-library/react'
 import { screen } from '@testing-library/dom'
-import { App, Header, Trick } from './App';
-import { parse } from 'orga';
+import { App, Header, Trick } from './App'
+import { parse } from 'orga'
 import { astMakeTrick } from './astUtils.js'
 
 it('renders header content', () => {
   const { getByText } = render(<Header />);
   const headerContent = getByText(/Tricks by Tony Aldon/i);
   expect(headerContent).toBeInTheDocument();
-});
+})
 
 it('renders "Trick" component', () => {
   const content = `
@@ -30,8 +30,7 @@ some code 1
   const { getByText } = render(<Trick trick={trick} />);
   const trickText = getByText(/Headline 1.1.1/i);
   expect(trickText).toBeInTheDocument();
-});
-
+})
 
 describe('App', () => {
   const content = `

@@ -1,6 +1,6 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import logo from './logo.svg'
+import './App.css'
 import { astMakeTricks } from './astUtils.js'
 
 function Header() {
@@ -35,4 +35,4 @@ function Trick(props) {
   );
 }
 
-export { App, Header, Trick };
+export { App, Header, Trick }

@@ -64,4 +64,4 @@ function astMakeTricks(ast) {
 }
 
 export { astGoToNode, astMakeListItemBlock, astMakeTrick,
-         astNumberOfTricksTopSection , astMakeTricks};
+         astNumberOfTricksTopSection , astMakeTricks}

@@ -1,9 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { parse } from 'orga';
+import React from 'react'
+import { render } from '@testing-library/react'
+import { parse } from 'orga'
 import { astGoToNode, astMakeListItemBlock,
          astMakeTrick, astNumberOfTricksTopSection,
-				 astMakeTricks } from './astUtils.js';
+				 astMakeTricks } from './astUtils.js'
 
 describe('astGoToNode', () => {
   const content = `

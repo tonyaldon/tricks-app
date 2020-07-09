@@ -21,4 +21,4 @@ some code 2
 #+END_SRC
 `;
 
-export default orgContent;
+export default orgContent
