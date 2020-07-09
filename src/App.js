@@ -14,12 +14,12 @@ function Header() {
 function App(props) {
   const ast = props.ast;
   const tricks = astMakeTricks(ast);
-	const trickList = tricks.map((trick,index) =>
-		<Trick
-			key={index}
-			trick={trick}
-		/>);
-	return (
+  const trickList = tricks.map((trick,index) =>
+    <Trick
+      key={index}
+      trick={trick}
+    />);
+  return (
     <div className="App">
       <Header />
       <ul>{trickList}</ul>
@@ -35,4 +35,14 @@ function Trick(props) {
   );
 }
 
-export { App, Header, Trick }
+function Block(props) {
+  const language = props.block.params[0];
+  const code = props.block.value;
+  return (
+    <pre>
+      <code className={language}>{code}</code>
+    </pre>
+  );
+}
+
+export { App, Header, Trick, Block }

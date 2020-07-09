@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { screen } from '@testing-library/dom'
-import { App, Header, Trick } from './App'
+import { App, Header, Trick, Block } from './App'
 import { parse } from 'orga'
 import { astMakeTrick } from './astUtils.js'
 
@@ -30,6 +30,21 @@ some code 1
   const { getByText } = render(<Trick trick={trick} />);
   const trickText = getByText(/Headline 1.1.1/i);
   expect(trickText).toBeInTheDocument();
+})
+
+it('renders "Block" component', () => {
+  const content = `
+#+BEGIN_SRC javascript
+const parser = new Parser()
+const ast = parser.parse('Hello World')
+#+END_SRC
+`;
+
+  const ast = parse(content);
+  const block = ast.children[0];
+	const { getByText } = render(<Block block={block} />);
+	const blockText = getByText(/parse\('Hello World'\)/i);
+  expect(blockText).toBeInTheDocument();
 })
 
 describe('App', () => {
@@ -61,7 +76,6 @@ some code 2
     const { getByText } = render(
       <App ast={ast} />
     );
-		screen.debug()
     const trick_1 = getByText(/Headline 1.1.1/i);
     const trick_2 = getByText(/Headline 1.1.2/i);
     const trick_3 = getByText(/Headline 2.1.1/i);
