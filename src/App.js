@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { astMakeTricks } from './astUtils.js'
+import { astMakeTricks, MarkupOrLink } from './astUtils.js'
 
 function Header() {
   return (
@@ -19,11 +19,11 @@ function App(props) {
       key={index}
       trick={trick}
     />);
-  return (
+	return (
     <div className="App">
       <Header />
       <ul>{trickList}</ul>
-    </div>
+		</div>
   );
 }
 
@@ -45,4 +45,13 @@ function Block(props) {
   );
 }
 
-export { App, Header, Trick, Block }
+function Paragraph(props) {
+	const paragraphList = props.paragraph;
+	const paragraph = paragraphList.map((node,index) =>
+		<MarkupOrLink key={index} node={node} />);
+	return (
+		<div>{paragraph}</div>
+	);
+}
+
+export { App, Header, Trick, Block, Paragraph }

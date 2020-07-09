@@ -1,3 +1,5 @@
+import React from "react";
+
 /** Walk in the AST tree (obtain with orgajs) and goto a specific node.*/
 function astGoToNode(ast, branches) {
   var node = ast;
@@ -35,8 +37,8 @@ function astMakeListItemBlock(astList) {
 }
 
 /** From a top section in the AST tree (obtain with orgajs) and the trick
-		number (starting at 1) in that top section returns a trick.
-		That is an object with the keys headline_1, headline_2, headline_3 and list. */
+    number (starting at 1) in that top section returns a trick.
+    That is an object with the keys headline_1, headline_2, headline_3 and list. */
 function astMakeTrick(astTopSection, trickNumber) {
   return {
     headline_1 : astGoToNode(astTopSection, [0,0]).value,
@@ -63,5 +65,43 @@ function astMakeTricks(ast) {
   return tricks
 }
 
+/** From a node AST tree (obtain with orgajs) returns its text
+    content wrapped with the appropriate html tag.*/
+function MarkupOrLink(props) {
+  const astNode = props.node;
+	let element;
+  switch (astNode.type) {
+  case 'text':
+    element = astNode.value;
+		break;
+  case 'link':
+    element = <a href={astNode.uri.raw}>{astNode.desc}</a>
+    break;
+  case 'strikeThrough':
+    element = <del>{astNode.children[0].value}</del>;
+    break;
+  case 'underline':
+    element = <span style={{textDecoration: 'underline'}}>
+                {astNode.children[0].value}
+              </span>;
+    break;
+  case 'bold':
+    element = <b>{astNode.children[0].value}</b>;
+    break;
+  case 'italic':
+    element = <i>{astNode.children[0].value}</i>;
+    break;
+  case 'code':
+    element = <code>{astNode.children[0].value}</code>;
+    break;
+  case 'verbatim':
+    element = <code>{astNode.children[0].value}</code>;
+    break;
+  default:
+  }
+  return element;
+}
+
 export { astGoToNode, astMakeListItemBlock, astMakeTrick,
-         astNumberOfTricksTopSection , astMakeTricks}
+         astNumberOfTricksTopSection , astMakeTricks,
+         MarkupOrLink }

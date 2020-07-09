@@ -1,7 +1,7 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { screen } from '@testing-library/dom'
-import { App, Header, Trick, Block } from './App'
+import { App, Header, Trick, Block, Paragraph } from './App'
 import { parse } from 'orga'
 import { astMakeTrick } from './astUtils.js'
 
@@ -45,6 +45,24 @@ const ast = parser.parse('Hello World')
 	const { getByText } = render(<Block block={block} />);
 	const blockText = getByText(/parse\('Hello World'\)/i);
   expect(blockText).toBeInTheDocument();
+})
+
+it('renders "Paragraph" component', () => {
+  const content = `
+_underline_ and +strikeThrough+ and *bold* and /italic/ and
+~code~ and =verbatim= and [[https://github.com/tonyaldon/][link]].
+`;
+
+  const ast = parse(content);
+  const paragraph = ast.children[0].children;
+  const { getByText } = render(<Paragraph paragraph={paragraph} />);
+  expect(getByText(/underline/i)).toBeInTheDocument();
+  expect(getByText(/strikeThrough/i)).toBeInTheDocument();
+  expect(getByText(/bold/i)).toBeInTheDocument();
+  expect(getByText(/italic/i)).toBeInTheDocument();
+  expect(getByText(/code/i)).toBeInTheDocument();
+  expect(getByText(/verbatim/i)).toBeInTheDocument();
+  expect(getByText(/link/i)).toBeInTheDocument();
 })
 
 describe('App', () => {
