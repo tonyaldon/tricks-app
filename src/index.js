@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { App } from './App';
 import * as serviceWorker from './serviceWorker';
+import orgContent from './orgContent.js'
+import { parse } from 'orga'
+
+const ast = parse(orgContent);
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App ast={ast}/>
   </React.StrictMode>,
   document.getElementById('root')
 );

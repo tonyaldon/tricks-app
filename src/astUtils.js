@@ -1,5 +1,3 @@
-import { parse } from 'orga';
-
 /** Walk in the AST tree (obtain with orgajs) and goto a specific node.*/
 function astGoToNode(ast, branches) {
   var node = ast;

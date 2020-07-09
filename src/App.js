@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { astMakeTrick, astMakeTricks } from './astUtils.js'
+import { astMakeTricks } from './astUtils.js'
 
 function Header() {
   return (
