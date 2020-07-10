@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { screen } from '@testing-library/dom'
+import { screen, fireEvent } from '@testing-library/dom'
 import { App, Header, Trick, Block, Paragraph } from './App'
 import { parse } from 'orga'
 import { astMakeTrick } from './astUtils.js'
@@ -11,7 +11,7 @@ it('renders header content', () => {
   expect(headerContent).toBeInTheDocument();
 })
 
-it('renders "Trick" component', () => {
+describe('Trick', () => {
   const content = `
 * Headline 1
 ** Headline 1.1
@@ -24,17 +24,37 @@ some code 1
 - item 3
 `;
 
-  const ast = parse(content);
-  const astTopSection = ast.children[0];
-  const trickNumber = 1;
-  const trick = astMakeTrick(astTopSection, trickNumber);
-  const { getByText } = render(<Trick trick={trick} />);
-  expect(getByText(/Headline 1.1.1/i)).toBeInTheDocument();
-  expect(getByText(/item 1/i)).toBeInTheDocument();
-  expect(getByText(/item 2/i)).toBeInTheDocument();
-  expect(getByText(/some code 1/i)).toBeInTheDocument();
-  expect(getByText(/item 3/i)).toBeInTheDocument();
-})
+  it('renders "Trick" component collapsed', () => {
+    const ast = parse(content);
+    const astTopSection = ast.children[0];
+    const trickNumber = 1;
+    const trick = astMakeTrick(astTopSection, trickNumber);
+    const { getByText, getByTestId, container } = render(<Trick trick={trick} />);
+
+    expect(getByText(/Headline 1.1.1/i)).toBeInTheDocument();
+    expect(getByTestId('trick-title').parentNode.childNodes[1])
+      .toHaveStyle('overflow: hidden')
+  });
+
+  it('shows and hides the content of the "Trick" component', () => {
+    const ast = parse(content);
+    const astTopSection = ast.children[0];
+    const trickNumber = 1;
+    const trick = astMakeTrick(astTopSection, trickNumber);
+    const { getByText, getByTestId, container } = render(<Trick trick={trick} />);
+
+    expect(getByTestId('trick-title').parentNode.childNodes[1])
+      .toHaveStyle('overflow: hidden')
+
+    fireEvent.click(getByText(/Headline 1.1.1/i));
+    expect(getByTestId('trick-title').parentNode.childNodes[1])
+      .toHaveStyle('overflow: initial')
+
+    fireEvent.click(getByText(/Headline 1.1.1/i));
+    expect(getByTestId('trick-title').parentNode.childNodes[1])
+      .toHaveStyle('overflow: hidden')
+  })
+});
 
 it('renders "Block" component', () => {
   const content = `
@@ -46,8 +66,8 @@ const ast = parser.parse('Hello World')
 
   const ast = parse(content);
   const block = ast.children[0];
-	const { getByText } = render(<Block block={block} />);
-	const blockText = getByText(/parse\('Hello World'\)/i);
+  const { getByText } = render(<Block block={block} />);
+  const blockText = getByText(/parse\('Hello World'\)/i);
   expect(blockText).toBeInTheDocument();
 })
 

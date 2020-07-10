@@ -2,6 +2,7 @@ import React from 'react'
 import logo from './logo.svg'
 import './App.css'
 import { astMakeTricks, MarkupOrLink } from './astUtils.js'
+import { Collapse } from 'react-collapse'
 
 function Header() {
   return (
@@ -27,31 +28,51 @@ function App(props) {
   );
 }
 
-function Trick(props) {
-  const nodeList = props.trick.list;
-  const items = nodeList.map((node,index) => {
-    if (node.type == 'list.item') {
-      return (
-        <Paragraph
-          key={index}
-          paragraph={node.children}
-        />
-      );
-    } else {
-      return (
-        <Block
-          key={index}
-          block={node}
-        />
-      );
-    }
-  });
-  return (
-    <div>
-      <p>{props.trick.headline_3}</p>
-      <ul>{items}</ul>
-    </div>
-  );
+class Trick extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isOpened: false};
+  }
+
+  handleClick = () => {
+    this.setState({isOpened: !this.state.isOpened})
+  }
+
+  render () {
+    const title = this.props.trick.headline_3;
+    const nodeList = this.props.trick.list;
+    const items = nodeList.map((node,index) => {
+      if (node.type === 'list.item') {
+        return (
+          <Paragraph
+            key={index}
+            paragraph={node.children}
+          />
+        );
+      } else {
+        return (
+          <Block
+            key={index}
+            block={node}
+          />
+        );
+      }
+    });
+    return (
+      <div>
+        <button
+          data-testid="trick-title"
+          onClick={this.handleClick}
+          type="button"
+        >
+          {title}
+        </button>
+        <Collapse isOpened={this.state.isOpened}>
+          <ul>{items}</ul>
+        </Collapse>
+      </div>
+    );
+  }
 }
 
 function Block(props) {
