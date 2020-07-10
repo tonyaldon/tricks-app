@@ -16,11 +16,12 @@ it('renders "Trick" component', () => {
 * Headline 1
 ** Headline 1.1
 *** Headline 1.1.1
-- item 1
+- item 1 ~inline code~ and *bold words*
 - item 2
 #+BEGIN_SRC bash
 some code 1
 #+END_SRC
+- item 3
 `;
 
   const ast = parse(content);
@@ -28,8 +29,11 @@ some code 1
   const trickNumber = 1;
   const trick = astMakeTrick(astTopSection, trickNumber);
   const { getByText } = render(<Trick trick={trick} />);
-  const trickText = getByText(/Headline 1.1.1/i);
-  expect(trickText).toBeInTheDocument();
+  expect(getByText(/Headline 1.1.1/i)).toBeInTheDocument();
+  expect(getByText(/item 1/i)).toBeInTheDocument();
+  expect(getByText(/item 2/i)).toBeInTheDocument();
+  expect(getByText(/some code 1/i)).toBeInTheDocument();
+  expect(getByText(/item 3/i)).toBeInTheDocument();
 })
 
 it('renders "Block" component', () => {

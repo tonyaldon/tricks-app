@@ -19,18 +19,37 @@ function App(props) {
       key={index}
       trick={trick}
     />);
-	return (
+  return (
     <div className="App">
       <Header />
       <ul>{trickList}</ul>
-		</div>
+    </div>
   );
 }
 
 function Trick(props) {
+  const nodeList = props.trick.list;
+  const items = nodeList.map((node,index) => {
+    if (node.type == 'list.item') {
+      return (
+        <Paragraph
+          key={index}
+          paragraph={node.children}
+        />
+      );
+    } else {
+      return (
+        <Block
+          key={index}
+          block={node}
+        />
+      );
+    }
+  });
   return (
     <div>
       <p>{props.trick.headline_3}</p>
+      <ul>{items}</ul>
     </div>
   );
 }
@@ -46,12 +65,12 @@ function Block(props) {
 }
 
 function Paragraph(props) {
-	const paragraphList = props.paragraph;
-	const paragraph = paragraphList.map((node,index) =>
-		<MarkupOrLink key={index} node={node} />);
-	return (
-		<div>{paragraph}</div>
-	);
+  const paragraphList = props.paragraph;
+  const paragraph = paragraphList.map((node,index) =>
+    <MarkupOrLink key={index} node={node} />);
+  return (
+    <div>{paragraph}</div>
+  );
 }
 
 export { App, Header, Trick, Block, Paragraph }

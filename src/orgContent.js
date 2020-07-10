@@ -2,7 +2,7 @@ const orgContent = `
 * Headline 1
 ** Headline 1.1
 *** Headline 1.1.1
-- item 1
+- item 1 with ~inline code~ and *bold words*
 - item 2
 #+BEGIN_SRC bash
 some code 1
