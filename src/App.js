@@ -12,22 +12,6 @@ function Header() {
   );
 }
 
-function App(props) {
-  const ast = props.ast;
-  const tricks = astMakeTricks(ast);
-  const trickList = tricks.map((trick,index) =>
-    <Trick
-      key={index}
-      trick={trick}
-    />);
-  return (
-    <div className="App">
-      <Header />
-      <ul>{trickList}</ul>
-    </div>
-  );
-}
-
 class Trick extends React.Component {
   constructor(props) {
     super(props);
@@ -98,6 +82,24 @@ function Paragraph(props) {
     <MarkupOrLink key={index} node={node} />);
   return (
     <div>{paragraph}</div>
+
+function App(props) {
+  const ast = props.ast;
+  const tricks = astMakeTricks(ast);
+  const trickList = tricks.map((trick,index) =>
+    <Trick
+      key={index}
+      trick={trick}
+    />);
+  return (
+    <div className="container">
+      <div className="header">
+        <Header />
+      </div>
+      <div>
+        <ul>{trickList}</ul>
+      </div>
+    </div>
   );
 }
 
