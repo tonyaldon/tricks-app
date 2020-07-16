@@ -59,15 +59,22 @@ class Trick extends React.Component {
       }
     });
     return (
-      <div>
-        <button
-          data-testid="trick-title"
-          onClick={this.handleClick}
-          type="button"
+      <div className="trick">
+        <div className="trick-button-container">
+          <button
+            data-testid="trick-title"
+            onClick={this.handleClick}
+            type="button"
+            className="trick-button"
+          >
+            {title}
+          </button>
+        </div>
+        <Collapse
+          isOpened={this.state.isOpened}
+          theme={{collapse: 'ReactCollapse--collapse',
+                  content: 'content trick-content ReactCollapse--content'}}
         >
-          {title}
-        </button>
-        <Collapse isOpened={this.state.isOpened}>
           <ul>{items}</ul>
         </Collapse>
       </div>

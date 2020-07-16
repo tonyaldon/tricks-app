@@ -32,7 +32,7 @@ some code 1
     const { getByText, getByTestId, container } = render(<Trick trick={trick} />);
 
     expect(getByText(/Headline 1.1.1/i)).toBeInTheDocument();
-    expect(getByTestId('trick-title').parentNode.childNodes[1])
+    expect(getByTestId('trick-title').parentNode.parentNode.childNodes[1])
       .toHaveStyle('overflow: hidden')
   });
 
@@ -43,15 +43,15 @@ some code 1
     const trick = astMakeTrick(astTopSection, trickNumber);
     const { getByText, getByTestId, container } = render(<Trick trick={trick} />);
 
-    expect(getByTestId('trick-title').parentNode.childNodes[1])
+    expect(getByTestId('trick-title').parentNode.parentNode.childNodes[1])
       .toHaveStyle('overflow: hidden')
 
     fireEvent.click(getByText(/Headline 1.1.1/i));
-    expect(getByTestId('trick-title').parentNode.childNodes[1])
+    expect(getByTestId('trick-title').parentNode.parentNode.childNodes[1])
       .toHaveStyle('overflow: initial')
 
     fireEvent.click(getByText(/Headline 1.1.1/i));
-    expect(getByTestId('trick-title').parentNode.childNodes[1])
+    expect(getByTestId('trick-title').parentNode.parentNode.childNodes[1])
       .toHaveStyle('overflow: hidden')
   })
 });
