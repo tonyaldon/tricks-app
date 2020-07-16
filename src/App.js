@@ -28,10 +28,11 @@ class Trick extends React.Component {
     const items = nodeList.map((node,index) => {
       if (node.type === 'list.item') {
         return (
-          <Paragraph
-            key={index}
-            paragraph={node.children}
-          />
+          <li key={index}>
+            <Paragraph
+              paragraph={node.children}
+            />
+          </li>
         );
       } else {
         return (
@@ -81,7 +82,9 @@ function Paragraph(props) {
   const paragraph = paragraphList.map((node,index) =>
     <MarkupOrLink key={index} node={node} />);
   return (
-    <div>{paragraph}</div>
+    <p>{paragraph}</p>
+  );
+}
 
 function App(props) {
   const ast = props.ast;
