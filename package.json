@@ -35,6 +35,7 @@
     ]
   },
   "devDependencies": {
+    "bulma": "^0.9.0",
     "prettier": "2.0.5"
   }
 }
