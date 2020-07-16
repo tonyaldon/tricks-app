@@ -1,38 +1,54 @@
-.App {
-  /* text-align: center; */
+@import 'myBulma';
+
+button {
+  outline:none !important;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+header {
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header {
+	color: white;
+	display: flex;
+	justify-content:center;
+font-family: 'Passion One', cursive;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.trick {
+  margin-bottom: 0.2rem;
 }
 
-.App-link {
-  color: #61dafb;
+.trick-button-container {
+  background: linear-gradient(rgb(26, 31, 43) 0%, rgb(8, 11, 18) 100%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.trick-button {
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: calc(0.75em - 1px);
+  padding-right: calc(0.75em - 1px);
+  padding-top: calc(0.5em - 1px);
+  color: hsl(0, 0%, 96%);
+  background: linear-gradient(rgb(40, 47, 63) 0%, rgb(8, 11, 18) 100%);
+  border-radius: 0px;
+  border: none;
+  border-top: 1px solid rgb(18, 25, 39);
+  font-family: "Rajdhani", sans-serif;
+  font-size:1em;
+  display:flex;
+  width: 100%;
+}
+
+.trick-button:focus,
+.trick-button:hover {
+  border:none;
+	background: linear-gradient(to bottom, #00d1b2, #3bd4d6, #77d5e9, #a9d5ed, #ccd7e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.trick-content {
+  background-image: radial-gradient(47.66% 38.4% at 52.19% 28.51%, rgb(18, 25, 40) 0%, rgb(8, 11, 18) 100%);
+  padding-bottom: 0.8rem;
 }

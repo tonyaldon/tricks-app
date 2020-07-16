@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from './logo.svg'
 import './App.scss'
 import { astMakeTricks, MarkupOrLink } from './astUtils.js'
 import { Collapse } from 'react-collapse'

@@ -1,0 +1,84 @@
+@charset "utf-8";
+
+@import-normalize;
+
+@import url('https://fonts.googleapis.com/css2?family=Passion+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap');
+
+$family-sans-serif: "Signika", sans-serif;
+$body-background-color: none;
+
+// @import "~bulma/bulma.sass";
+@import "~bulma/sass/utilities/_all.sass";
+@import "~bulma/sass/base/generic.sass";
+@import "~bulma/sass/base/minireset.sass";
+@import "~bulma/sass/elements/container.sass";
+@import "~bulma/sass/elements/content.sass";
+
+body {
+  background-image: radial-gradient(47.66% 38.4% at 52.19% 28.51%, rgb(18, 25, 40) 0%, rgb(8, 11, 18) 100%);
+  color: rgba(204, 215, 229, 1);
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+	background: linear-gradient(to right bottom, #222939, #1e2535, #1b2231, #171e2e, #141b2a);
+	border: 1px solid rgb(8, 11, 18);
+	border-radius: 0.5em;
+}
+
+code {
+	background: linear-gradient(to right bottom, #222939, #1e2535, #1b2231, #171e2e, #141b2a);
+  border-radius:0.5em;
+	color: #00d1b2;
+  font-size: 0.875em;
+  font-weight: normal;
+  padding: 0.15em 0.35em;
+}
+
+code,
+pre {
+  -moz-osx-font-smoothing: auto;
+  -webkit-font-smoothing: auto;
+  font-family: monospace;
+}
+
+pre {
+  -webkit-overflow-scrolling: touch;
+	background-color:inherit;
+  font-size: 0.875em;
+  overflow-x: auto;
+  padding: 0px 0px;
+	white-space: pre;
+  word-wrap: normal;
+}
+
+pre code {
+  color: currentColor;
+  font-size: 1em;
+  padding: 0;
+}
+
+
+.content ul {
+  list-style: disc outside;
+  margin-left: 2em;
+  margin-top: 1em;
+  margin-right: 2em;
+}
+
+.content pre {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  margin-top: 0.8em;
+	padding: 0rem;
+  white-space: pre;
+  word-wrap: normal;
+}
+
+.container {
+  max-width:800px;
+}
