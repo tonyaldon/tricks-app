@@ -8,6 +8,8 @@
 
 $family-sans-serif: "Signika", sans-serif;
 $body-background-color: none;
+$navbar-breakpoint:0;  // for horizontal navbar on mobile
+$navbar-item-hover-background-color: #222939;
 
 // @import "~bulma/bulma.sass";
 @import "~bulma/sass/utilities/_all.sass";
@@ -15,6 +17,9 @@ $body-background-color: none;
 @import "~bulma/sass/base/minireset.sass";
 @import "~bulma/sass/elements/container.sass";
 @import "~bulma/sass/elements/content.sass";
+@import "~bulma/sass/elements/icon.sass";
+@import "~bulma/sass/components/navbar.sass";
+
 
 body {
   background-image: radial-gradient(47.66% 38.4% at 52.19% 28.51%, rgb(18, 25, 40) 0%, rgb(8, 11, 18) 100%);

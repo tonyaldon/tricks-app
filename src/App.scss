@@ -1,19 +1,56 @@
 @import 'myBulma';
+@import "~@mdi/font/css/materialdesignicons.min.css";
 
 button {
   outline:none !important;
 }
 
-header {
-  margin-top: 1em;
-  margin-bottom: 1em;
+nav {
+  font-size: 1.5rem;
 }
 
-.header {
-	color: white;
-	display: flex;
-	justify-content:center;
-font-family: 'Passion One', cursive;
+.navbar-item, .navbar-link {
+  line-height: 1;
+}
+
+.navbar-brand {
+  padding-left:0.6rem;
+}
+
+.navbar-end {
+  padding-right:1rem;
+}
+
+.nav-trick {
+  background-color:inherit;
+  border-bottom: 0.1px solid #1c8182;
+}
+
+.nav-brand {
+  display:flex;
+  align-items:baseline;
+}
+
+.nav-brand-name {
+  font-family: 'Passion One', cursive;
+  text-transform: uppercase;
+  font-size:1.5em;
+  background: linear-gradient(to bottom, #00d1b2, #3bd4d6, #77d5e9, #a9d5ed, #ccd7e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-brand-author {
+  color: hsl(0, 0%, 80%);
+  vertical-align:text-top;
+  font-size: 0.5em;
+  margin-left:0.2em;
+}
+
+.mdi-twitter, .mdi-github {
+  color:hsl(0, 0%, 84%);
+}
+
 }
 
 .trick {
@@ -43,7 +80,7 @@ font-family: 'Passion One', cursive;
 .trick-button:focus,
 .trick-button:hover {
   border:none;
-	background: linear-gradient(to bottom, #00d1b2, #3bd4d6, #77d5e9, #a9d5ed, #ccd7e5);
+  background: linear-gradient(to bottom, #00d1b2, #3bd4d6, #77d5e9, #a9d5ed, #ccd7e5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }

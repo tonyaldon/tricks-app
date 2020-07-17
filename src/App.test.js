@@ -1,13 +1,13 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 import { screen, fireEvent } from '@testing-library/dom'
-import { App, Header, Trick, Block, Paragraph } from './App'
+import { App, NavBar, Trick, Block, Paragraph } from './App'
 import { parse } from 'orga'
 import { astMakeTrick } from './astUtils.js'
 
 it('renders header content', () => {
-  const { getByText } = render(<Header />);
-  const headerContent = getByText(/Tricks by Tony Aldon/i);
+  const { getByText } = render(<NavBar />);
+  const headerContent = getByText(/Tricks/i);
   expect(headerContent).toBeInTheDocument();
 })
 

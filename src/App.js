@@ -3,11 +3,38 @@ import './App.scss'
 import { astMakeTricks, MarkupOrLink } from './astUtils.js'
 import { Collapse } from 'react-collapse'
 
-function Header() {
+function NavBar() {
   return (
-    <header>
-      <h1>Tricks by Tony Aldon</h1>
-    </header>
+    <nav className="navbar nav-trick" role="navigation" aria-label="main navigation">
+      <div className="navbar-brand">
+        <div className="navbar-item">
+          <div className="nav-brand">
+            <span className="nav-brand-name">
+              Tricks
+            </span>
+            <span className="nav-brand-author">
+              by Tony Aldon
+            </span>
+          </div>
+        </div>
+      </div>
+      <div className="navbar-menu">
+        <div className="navbar-end">
+          <a className="navbar-item" href="https://twitter.com/tonyaldon">
+            <span className="icon is-small">
+              <i className="mdi mdi-twitter"></i>
+            </span>
+          </a>
+          <a className="navbar-item" href="https://github.com/tonyaldon">
+            <span className="icon is-small">
+              <i className="mdi mdi-github"></i>
+            </span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  );
+}
   );
 }
 
@@ -95,14 +122,10 @@ function App(props) {
     />);
   return (
     <div className="container">
-      <div className="header">
-        <Header />
-      </div>
-      <div>
-        <ul>{trickList}</ul>
-      </div>
+      <NavBar />
+      <ul>{trickList}</ul>
     </div>
   );
 }
 
-export { App, Header, Trick, Block, Paragraph }
+export { App, NavBar, Trick, Block, Paragraph }
