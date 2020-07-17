@@ -35,6 +35,14 @@ function NavBar() {
     </nav>
   );
 }
+
+function Footer() {
+  return (
+    <footer className="footer">
+      <div className="content">
+        <p>Tricks by Tony Aldon</p>
+      </div>
+    </footer>
   );
 }
 
@@ -124,6 +132,7 @@ function App(props) {
     <div className="container">
       <NavBar />
       <ul>{trickList}</ul>
+			<Footer />
     </div>
   );
 }
