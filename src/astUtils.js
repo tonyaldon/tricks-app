@@ -1,6 +1,6 @@
 import React from "react";
 
-/** Walk in the AST tree (obtain with orgajs) and goto a specific node.*/
+/** Walk in the AST tree (obtain with orga) and goto a specific node.*/
 function astGoToNode(ast, branches) {
   var node = ast;
   if (branches == null) {
@@ -36,44 +36,45 @@ function astMakeListItemBlock(astList) {
   return listItemBlock;
 }
 
-/** From a top section in the AST tree (obtain with orgajs) and the trick
-    number (starting at 1) in that top section returns a trick.
-    That is an object with the keys headline_1, headline_2, headline_3 and list. */
-function astMakeTrick(astTopSection, trickNumber) {
+/** From a top section in the AST tree (obtain with orga) and the trick
+    index ([2,1] for second headline at level 2 and first headline at level 3)
+    in that top section returns a trick. **/
+function astMakeTrick(astTopSection, trickIndex) {
+  const headline2Index = trickIndex[0];
+  const headline3Index = trickIndex[1];
   return {
     headline_1 : astGoToNode(astTopSection, [0,0]).value,
-    headline_2 : astGoToNode(astTopSection, [1,0,0]).value,
-    headline_3 : astGoToNode(astTopSection, [1,trickNumber,0,0]).value,
-    list : astMakeListItemBlock(astGoToNode(astTopSection, [1,trickNumber]).children)
+    headline_2 : astGoToNode(astTopSection, [headline2Index,0,0]).value,
+    headline_3 : astGoToNode(astTopSection, [headline2Index,
+                                             headline3Index,0,0]).value,
+    list : astMakeListItemBlock(
+      astGoToNode(astTopSection,[headline2Index,headline3Index]).children)
   };
 }
 
-function astNumberOfTricksTopSection(astTopSection) {
-  return astGoToNode(astTopSection, [1]).children.length - 1
-}
-
-/** Make the list off all tricks of the AST tree (obtain with orgajs).*/
+/** Make the list off all tricks of the AST tree (obtain with orga).*/
 function astMakeTricks(ast) {
   let tricks = [];
-  for (let topSection = 0; topSection < ast.children.length; topSection++) {
-    let astTopSection = ast.children[topSection];
-    let numberOfTricks = astNumberOfTricksTopSection(astTopSection);
-    for (let trickNumber = 1; trickNumber <= numberOfTricks; trickNumber++) {
-      tricks.push(astMakeTrick(astTopSection, trickNumber));
-    };
-  };
+  ast.children.forEach((astTopSection) => {
+    astTopSection.children.slice(1).forEach((headline2,headline2Index) => {
+      headline2.children.slice(1).forEach((headline3,headline3Index) => {
+        let trickIndex = [headline2Index + 1, headline3Index + 1];
+        tricks.push(astMakeTrick(astTopSection, trickIndex));
+      })
+    })
+  })
   return tricks
 }
 
-/** From a node AST tree (obtain with orgajs) returns its text
+/** From a node AST tree (obtain with orga) returns its text
     content wrapped with the appropriate html tag.*/
 function MarkupOrLink(props) {
   const astNode = props.node;
-	let element;
+  let element;
   switch (astNode.type) {
   case 'text':
     element = astNode.value;
-		break;
+    break;
   case 'link':
     element = <a href={astNode.uri.raw}>{astNode.desc}</a>
     break;
@@ -103,5 +104,4 @@ function MarkupOrLink(props) {
 }
 
 export { astGoToNode, astMakeListItemBlock, astMakeTrick,
-         astNumberOfTricksTopSection , astMakeTricks,
-         MarkupOrLink }
+         astMakeTricks, MarkupOrLink }

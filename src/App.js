@@ -25,7 +25,7 @@ function NavBar() {
               <i className="mdi mdi-twitter"></i>
             </span>
           </a>
-          <a className="navbar-item" href="https://github.com/tonyaldon">
+          <a className="navbar-item" href="https://github.com/tonyaldon/tonyaldon.github.io">
             <span className="icon is-small">
               <i className="mdi mdi-github"></i>
             </span>
@@ -132,7 +132,7 @@ function App(props) {
     <div className="container">
       <NavBar />
       <ul>{trickList}</ul>
-			<Footer />
+      <Footer />
     </div>
   );
 }

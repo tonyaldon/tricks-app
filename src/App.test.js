@@ -22,13 +22,16 @@ describe('Trick', () => {
 some code 1
 #+END_SRC
 - item 3
+** Headline 1.2
+*** Headline 1.2.1
+- item 1 ~inline code~ and *bold words*
 `;
 
   it('renders "Trick" component collapsed', () => {
     const ast = parse(content);
     const astTopSection = ast.children[0];
-    const trickNumber = 1;
-    const trick = astMakeTrick(astTopSection, trickNumber);
+    const trickIndex = [1,1];
+    const trick = astMakeTrick(astTopSection, trickIndex);
     const { getByText, getByTestId, container } = render(<Trick trick={trick} />);
 
     expect(getByText(/Headline 1.1.1/i)).toBeInTheDocument();
@@ -39,8 +42,8 @@ some code 1
   it('shows and hides the content of the "Trick" component', () => {
     const ast = parse(content);
     const astTopSection = ast.children[0];
-    const trickNumber = 1;
-    const trick = astMakeTrick(astTopSection, trickNumber);
+    const trickIndex = [1,1];
+    const trick = astMakeTrick(astTopSection, trickIndex);
     const { getByText, getByTestId, container } = render(<Trick trick={trick} />);
 
     expect(getByTestId('trick-title').parentNode.parentNode.childNodes[1])
@@ -110,10 +113,17 @@ some code 1
 - item 3
 #+BEGIN_SRC bash
 some code 2
-#+END_SRC`;
+#+END_SRC
+** Headline 2.2
+*** Headline 2.2.1
+- item 1
+#+BEGIN_SRC bash
+some code 3
+#+END_SRC
+`;
 
 
-  it('renders the 3 tricks of the content', () => {
+  it('renders the 4 tricks of the content', () => {
     const ast = parse(content);
     const { getByText } = render(
       <App ast={ast} />
@@ -121,8 +131,10 @@ some code 2
     const trick_1 = getByText(/Headline 1.1.1/i);
     const trick_2 = getByText(/Headline 1.1.2/i);
     const trick_3 = getByText(/Headline 2.1.1/i);
+    const trick_4 = getByText(/Headline 2.2.1/i);
     expect(trick_1).toBeInTheDocument();
     expect(trick_2).toBeInTheDocument();
     expect(trick_3).toBeInTheDocument();
+    expect(trick_4).toBeInTheDocument();
   });
 })

@@ -5,7 +5,6 @@ import {
   astGoToNode,
   astMakeListItemBlock,
   astMakeTrick,
-  astNumberOfTricksTopSection,
   astMakeTricks,
   MarkupOrLink,
 } from "./astUtils.js";
@@ -15,6 +14,8 @@ describe("astGoToNode", () => {
 * Headline 1
 ** Headline 1.1
 *** Headline 1.1.1
+** Headline 1.2
+*** Headline 1.2.1
 * Headline 2
 ** Headline 2.1
 *** Headline 2.1.1`;
@@ -26,8 +27,17 @@ describe("astGoToNode", () => {
   it("goes to the headline: Headline 2", () => {
     expect(astGoToNode(ast, [1, 0, 0]).value).toBe("Headline 2");
   });
+  it("goes to the headline: Headline 1.1", () => {
+    expect(astGoToNode(ast, [0, 1, 0, 0]).value).toBe("Headline 1.1");
+  });
+  it("goes to the headline: Headline 1.2", () => {
+    expect(astGoToNode(ast, [0, 2, 0, 0]).value).toBe("Headline 1.2");
+  });
   it("goes to the headline: Headline 1.1.1", () => {
     expect(astGoToNode(ast, [0, 1, 1, 0, 0]).value).toBe("Headline 1.1.1");
+  });
+  it("goes to the headline: Headline 2.1.1", () => {
+    expect(astGoToNode(ast, [1, 1, 1, 0, 0]).value).toBe("Headline 2.1.1");
   });
 });
 
@@ -82,14 +92,17 @@ some code 1
 - item 3
 #+BEGIN_SRC bash
 some code 2
-#+END_SRC`;
+#+END_SRC
+** Headline 2.2
+*** Headline 2.2.1
+- item 1`;
 
   const ast = parse(content);
 
   it('makes trick "Headline 1.1.1"', () => {
     const astTopSection = ast.children[0];
-    const trickNumber = 1;
-    const trick = astMakeTrick(astTopSection, trickNumber);
+    const trickIndex = [1,1];
+    const trick = astMakeTrick(astTopSection, trickIndex);
     const _trick = {
       headline_1: "Headline 1",
       headline_2: "Headline 1.1",
@@ -100,8 +113,8 @@ some code 2
   });
   it('makes trick "Headline 1.1.2"', () => {
     const astTopSection = ast.children[0];
-    const trickNumber = 2;
-    const trick = astMakeTrick(astTopSection, trickNumber);
+    const trickIndex = [1,2];
+    const trick = astMakeTrick(astTopSection, trickIndex);
     const _trick = {
       headline_1: "Headline 1",
       headline_2: "Headline 1.1",
@@ -112,8 +125,8 @@ some code 2
   });
   it('makes trick "Headline 2.1.1"', () => {
     const astTopSection = ast.children[1];
-    const trickNumber = 1;
-    const trick = astMakeTrick(astTopSection, trickNumber);
+    const trickIndex = [1,1];
+    const trick = astMakeTrick(astTopSection, trickIndex);
     const _trick = {
       headline_1: "Headline 2",
       headline_2: "Headline 2.1",
@@ -121,6 +134,18 @@ some code 2
     };
     expect(trick).toMatchObject(_trick);
     expect(trick.list.length).toBe(4);
+  });
+  it('makes trick "Headline 2.2.1"', () => {
+    const astTopSection = ast.children[1];
+    const trickIndex = [2,1];
+    const trick = astMakeTrick(astTopSection, trickIndex);
+    const _trick = {
+      headline_1: "Headline 2",
+      headline_2: "Headline 2.2",
+      headline_3: "Headline 2.2.1",
+    };
+    expect(trick).toMatchObject(_trick);
+    expect(trick.list.length).toBe(1);
   });
 });
 
@@ -145,22 +170,22 @@ some code 1
 - item 3
 #+BEGIN_SRC bash
 some code 2
-#+END_SRC`;
+#+END_SRC
+** Headline 2.2
+*** Headline 2.2.1
+- item 1`;
 
   const ast = parse(content);
 
-  it('returns the number of tricks in the first top section "Headline 1"', () => {
-    const astTopSection = ast.children[0];
-    expect(astNumberOfTricksTopSection(astTopSection)).toBe(2);
-  });
   it("returns the number of tricks in the AST", () => {
     const tricks = astMakeTricks(ast);
-    expect(tricks.length).toBe(3);
+    expect(tricks.length).toBe(4);
   });
   it("returns the name list of the tricks in the AST", () => {
     const tricks = astMakeTricks(ast);
     const trickNames = tricks.map((trick) => trick.headline_3);
-    const _trickNames = ["Headline 1.1.1", "Headline 1.1.2", "Headline 2.1.1"];
+    const _trickNames = ["Headline 1.1.1", "Headline 1.1.2",
+                         "Headline 2.1.1", "Headline 2.2.1"];
     expect(trickNames).toMatchObject(_trickNames);
   });
 });
