@@ -1,14 +1,24 @@
 # About
 
-`tricks-app` is a web format (web page) of my
-[https://github.com/tonyaldon/tricks](tricks) on computing.
+`tricks-app` repository holds the code off the web application
+[tricks](https://tricks.tonyaldon.com/).
+
+I just gather some `problems/questions/errors` I had to figure out to
+setup my linux environment and to feel at home using linux.
+
+The app takes the form of a Q&A.
+
+So far the app contains 166 questions on `gtk`, `rsync`, `i3`, `ssh`,
+`fonts`, `usb drives`, `symbolic links`, `watching files`, `CPU`,
+`RAM`, `sudo`, ....
+
+You can find all my notes on computing [here](https://github.com/tonyaldon/tricks).
 
 # Motivation
 
-Although I enjoyed taking my notes whith
-[https://orgmode.org/](org-mode) inside `emacs`, I sometime want to
-read/scroll them (as a twitter or facebook feed) as any other
-apps. This is why comes this web application.
+Although I enjoye taking my notes with
+[org-mode](https://orgmode.org/) inside `emacs`, I sometime want to
+read/scroll them on my mobile as any other classic apps.
 
 # Programming details
 
@@ -17,12 +27,44 @@ apps. This is why comes this web application.
    with `emacs`. Therefore, I don't need a `backend` and the
    `frontend` would be light.
 
-2. I'm using [https://github.com/orgapp/orgajs](orgajs) to parse my
-   `org` files.
+2. I'm using [orgajs](https://github.com/orgapp/orgajs) to parse my
+   `org` file.
 
-3. This project was bootstrapped with [Create React
-   App](https://github.com/facebook/create-react-app). See more
+3. I'm using [highlightjs](https://highlightjs.org/) to highlight
+   chunks of code with the theme
+   [discreet-theme](https://github.com/tonyaldon/discreet-theme).
+
+4. This project was bootstrapped with [Create React
+   App](https://github.com/facebook/create-react-app). More
    details in the section below.
+
+5. This app is deployed using [github
+   pages](https://pages.github.com/). More details in the section below.
+
+# Deploy (github page)
+
+To deploy as a github page, I just run:
+
+	npm run deploy
+
+To work, I added to `package.json` file the line
+
+	"homepage": "https://tricks.tonyaldon.com"
+
+and the elements `predeploy` and `deploy` as part of the `scripts`
+element as follow:
+
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -r git@github.com:tonyaldon/tonyaldon.github.io.git -d build"
+
+I also added a `CNAME` file that contains `tricks.tonyaldon.com` to
+get my custom domain working. As I'm working with `create-react-app`,
+the `CNAME` file is part of the `public` directory.
+
+So, when I run the command `npm run deploy`, this produces a new
+commit in my repository `tonyaldon.github.io` on the `master` branch
+with the new build of the app and as a consequence of github pages
+the app at `https://tricks.tonyaldon.com` gets updated.
 
 # Ceate React App
 
