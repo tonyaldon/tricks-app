@@ -2,6 +2,7 @@
   "name": "tricks-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tricks.tonyaldon.com",
   "dependencies": {
     "@mdi/font": "^5.3.45",
     "@testing-library/jest-dom": "^4.2.4",
@@ -15,6 +16,8 @@
     "react-scripts": "3.4.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -b master -r git@github.com:tonyaldon/tonyaldon.github.io.git -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -37,6 +40,7 @@
   },
   "devDependencies": {
     "bulma": "^0.9.0",
+    "gh-pages": "^3.1.0",
     "prettier": "2.0.5"
   }
 }
