@@ -28,6 +28,7 @@ $link-hover: #3bd4d6!default;
 body {
   background-image: radial-gradient(47.66% 38.4% at 52.19% 28.51%, rgb(18, 25, 40) 0%, rgb(8, 11, 18) 100%);
   color: rgba(204, 215, 229, 1);
+	font-size: 120%;
 }
 
 .hljs {
@@ -42,7 +43,7 @@ body {
 code {
 	background: linear-gradient(to right bottom, #222939, #1e2535, #1b2231, #171e2e, #141b2a);
   border-radius:0.5em;
-	color: rgba(204, 215, 229, 1);
+	color: #dedede;
   font-size: 0.875em;
   font-weight: normal;
   padding: 0.15em 0.35em;

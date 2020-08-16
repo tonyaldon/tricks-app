@@ -21,12 +21,12 @@ function NavBar() {
       <div className="navbar-menu">
         <div className="navbar-end">
           <a className="navbar-item" href="https://twitter.com/tonyaldon">
-            <span className="icon is-small">
+            <span className="icon">
               <i className="mdi mdi-twitter"></i>
             </span>
           </a>
-          <a className="navbar-item" href="https://github.com/tonyaldon/tonyaldon.github.io">
-            <span className="icon is-small">
+          <a className="navbar-item" href="https://github.com/tonyaldon/tricks-app">
+            <span className="icon">
               <i className="mdi mdi-github"></i>
             </span>
           </a>

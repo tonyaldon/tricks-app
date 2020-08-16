@@ -6,7 +6,7 @@ button {
 }
 
 nav {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .navbar-item, .navbar-link {
@@ -34,7 +34,7 @@ nav {
 .nav-brand-name {
   font-family: 'Passion One', cursive;
   text-transform: uppercase;
-  font-size:1.5em;
+  font-size:3rem;
   background: linear-gradient(to bottom, #00d1b2, #3bd4d6, #77d5e9, #a9d5ed, #ccd7e5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -43,7 +43,7 @@ nav {
 .nav-brand-author {
   color: hsl(0, 0%, 80%);
   vertical-align:text-top;
-  font-size: 0.5em;
+  font-size: 0.8rem;
   margin-left:0.2em;
 }
 
@@ -76,7 +76,7 @@ nav {
   border: none;
   border-top: 1px solid rgb(18, 25, 39);
   font-family: "Rajdhani", sans-serif;
-  font-size:1em;
+  font-size:1.1em;
   width: 100%;
 	text-align: left;
 }
