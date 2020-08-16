@@ -84,9 +84,7 @@ nav {
 .trick-button:focus,
 .trick-button:hover {
   border:none;
-  background: linear-gradient(to bottom, #00d1b2, #3bd4d6, #77d5e9, #a9d5ed, #ccd7e5);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+	color: #77d5e9;
 }
 
 .trick-content {

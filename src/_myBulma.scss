@@ -10,6 +10,9 @@ $family-sans-serif: "Signika", sans-serif;
 $body-background-color: none;
 $navbar-breakpoint:0;  // for horizontal navbar on mobile
 $navbar-item-hover-background-color: #222939;
+$link: #00d1b2 !default;
+$link-focus-border: #00d1b2!default;
+$link-hover: #3bd4d6!default;
 
 // @import "~bulma/bulma.sass";
 @import "~bulma/sass/utilities/_all.sass";
@@ -39,7 +42,7 @@ body {
 code {
 	background: linear-gradient(to right bottom, #222939, #1e2535, #1b2231, #171e2e, #141b2a);
   border-radius:0.5em;
-	color: #00d1b2;
+	color: rgba(204, 215, 229, 1);
   font-size: 0.875em;
   font-weight: normal;
   padding: 0.15em 0.35em;
