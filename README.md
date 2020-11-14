@@ -14,6 +14,8 @@ So far the app contains 166 questions on `gtk`, `rsync`, `i3`, `ssh`,
 
 You can find all my notes on computing [here](https://github.com/tonyaldon/tricks).
 
+<img src="tricks.png" alt="Tricks app by Tony Aldon" title="Tricks App by Tony Aldon">
+
 # Motivation
 
 Although I enjoye taking my notes with
