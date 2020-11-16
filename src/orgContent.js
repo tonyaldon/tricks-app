@@ -667,13 +667,81 @@ systemctl status emacs --user
 
 *** What journalctl command is for?
 - ~journalctl~: Query the systemd journal.
+** ps command
+*** What ps command is for?
+- ~ps~: report a snapshot of the current processes.
+*** What does STAT column refer to in the output of ps command?
+- This column indicate the process states.
+- See [[https://unix.stackexchange.com/questions/18474/what-does-this-process-stat-indicates][stackexchange]].
+- If I run the command ~ps -x~, the first 8 lines of the output I get
+  are:
+
+#+BEGIN_SRC text
+PID TTY      STAT   TIME COMMAND
+1104 ?        Ssl    0:00 PM2 v4.2.3: God Daemon (/home/tony/.pm2)
+1647 ?        Ss     0:01 /lib/systemd/systemd --user
+1648 ?        S      0:00 (sd-pam)
+1663 ?        Ss     0:00 /usr/bin/ssh-agent -a /run/user/1000/ssh-agent.socket
+1670 tty2     Ssl+   0:00 /usr/lib/gdm3/gdm-x-session --run-script i3
+1672 tty2     Sl+    1:18 /usr/lib/xorg/Xorg vt2 -displayfd 3 -auth /run/user/1
+1687 ?        Ss     0:00 /usr/bin/dbus-daemon --session --address=systemd: --n
+1690 tty2     S+     0:01 i3
+#+END_SRC
+
+- Processes states that ps indicates are:
+
+#+BEGIN_SRC text
+D Uninterruptible sleep (usually IO)
+R Running or runnable (on run queue)
+S Interruptible sleep (waiting for an event to complete)
+T Stopped, either by a job control signal or because it is being traced.
+W paging (not valid since the 2.6.xx kernel)
+X dead (should never be seen)
+Z Defunct ("zombie") process, terminated but not reaped by its parent.
+#+END_SRC
+
+- and the additional characters are:
+
+#+BEGIN_SRC text
+< high-priority (not nice to other users)
+N low-priority (nice to other users)
+L has pages locked into memory (for real-time and custom IO)
+s is a session leader
+l is multi-threaded (using CLONE_THREAD, like NPTL pthreads do)
++ is in the foreground process group
+#+END_SRC
+
+*** What does TTY mean in the command ps?
+- A ~TTY~ is a computer terminal. In the context of ~ps~, it is the
+  terminal that executed a particular command.
+- The abbreviation stands for /TeleTYpewriter/, which were devices
+  that allowed users to connect to early computers.
+- See [[https://stackoverflow.com/questions/7113770/what-does-tty-mean-in-the-unix-ps-command][stackoverflow]].
+
+** socket
+*** What is a socket?
+- A ~Unix domain socket~ or ~IPC socket~ is a data communications
+  endpoint for exchanging data between processes executing on the same
+  host operating system.
+- See [[https://en.wikipedia.org/wiki/Unix_domain_socket][wikipedia]] and [[https://unix.stackexchange.com/questions/243265/how-to-get-more-info-about-socket-file][stackexchange]].
+*** Where is my emacs server socket?
+- In the directory ~/var/run/user/1000/emacs/~.
 ** miscellaneous
 *** What hostnamectl command is for?
 - ~hostnamectl~: control the system hostname.
 *** What top command is for?
 - ~top~: display Linux processes.
-*** What ps command is for?
-- ~ps~: report a snapshot of the current processes.
+*** How can I check the PID number of my emacs process?
+- Use ~pidof~ command.
+- ~pidof~: Find the process ID of a running program.
+- See [[https://www.tecmint.com/find-process-name-pid-number-linux/][process name and pid (tecmint)]] and [[https://linuxize.com/post/pidof-command-in-linux/][pidof (linuxize)]].
+- If you have an ~emacs~ processe and you want to check its ~PID~
+  number, run the command:
+
+#+BEGIN_SRC bash
+pidof emacs
+#+END_SRC
+
 * Files
 ** Get info
 *** How can I recursively list a directory in a tree-like format?
@@ -822,6 +890,27 @@ Compression mode              : Lossy
 Stream size                   : 2.31 MiB (100%)
 #+END_SRC
 
+*** What option can I use to format the file time printed with -l option of ls command?
+- Use ~--time-style~ option of ~ls~ command:
+- ~--time-style~: with ~-l~, ~ls~ show time using style ~full-iso~,
+  ~long-iso~, ~iso~, ~locale~, or ~+FORMAT~ where FORMAT is
+  interpreted like in ~date~.
+- If you want to list the file of a directory with the time format set
+  to ~iso~, run the command:
+
+#+BEGIN_SRC bash
+ls -l --time-style=iso
+#+END_SRC
+
+- After running the previous command on one of my directory, I got
+  this output:
+
+#+BEGIN_SRC text
+-rw-r--r-- 1 tony tony 22293 11-11 19:10  clojure.org
+-rw-r--r-- 1 tony tony 44155 11-13 06:11  emacs.org
+-rw-r--r-- 1 tony tony 15442 08-03 12:10  frontend.org
+-rw-r--r-- 1 tony tony  6053 11-10 10:01  git.org
+#+END_SRC
 ** View files
 *** What cat, head and tail commands are for?
 - ~cat~: concatenate files and print on the standard output.
@@ -909,6 +998,20 @@ tar -xf archive.tar
 - You can easily /extract/ individual files from a large ~zip~ file,
   but not from a ~gzip~ tarball.
 ** Search
+*** What is fzf?
+- fzf is a general-purpose command-line fuzzy finder.
+- See [[https://github.com/junegunn/fzf][fzf]] repository and this [[https://www.youtube.com/watch?v=qgG5Jhi_Els][video on fzf]].
+*** How to update linux locate cache?
+- Use ~updatedb~ command.
+- ~updatedb~: Update a database for ~mlocate~.
+- See [[https://unix.stackexchange.com/questions/124757/how-to-update-linux-locate-cache][stackexchange]].
+- If you want to update the database use by ~locate~ command, run the
+  command:
+
+#+BEGIN_SRC bash
+sudo updatedb
+#+END_SRC
+
 *** What locate command is for?
 - ~locate~: find files by name.
 *** What grep command is for?
@@ -918,6 +1021,17 @@ tar -xf archive.tar
 
 #+BEGIN_SRC bash
 grep -i 'hello world' menu.h main.c
+#+END_SRC
+*** How to ignore binary files when searching with grep?
+- Use ~-I~ option of ~grep~ command.
+- ~-I~: Process a binary file as if it did not  contain  matching
+  data.
+- See [[https://stackoverflow.com/questions/25853722/how-to-suppress-binary-file-matching-results-in-grep][stackoverflow]].
+- If you want to search the sequence ~hello world~ in the files in
+  your current directory ignoring the binary files, run the command:
+
+#+BEGIN_SRC bash
+grep -I 'hello world' *
 #+END_SRC
 *** How to find files that match string or regexp?
 - Use ~find~ command.
@@ -993,6 +1107,76 @@ find . -type f -name "*baz*" -exec sed -i 's/foo/bar/g' {} +
 # all files whose name contains baz
 #+END_SRC
 
+** fd command
+*** With fd, how to find all files except hidden files and directories?
+- It's the default behaviour of ~fd~ command.
+- ~fd~: find entries in the filesystem.
+- See [[https://github.com/sharkdp/fd][fd]] repository.
+- If you want to find all files except hidden files and directories,
+  run the command:
+
+#+BEGIN_SRC bash
+fd
+#+END_SRC
+
+- Note that if you are in ~git~ directory, the search ignores the
+  files ignored by ~.gitignore~ file.
+
+*** With fd, how to include all hidden files in the search?
+- Use the option ~--hidden~ of ~fd~ command.
+- ~fd~: find entries in the filesystem.
+- See [[https://github.com/sharkdp/fd][fd]] repository.
+- If you want to include all hidden files in your ~fd~ search, run the
+  command:
+
+#+BEGIN_SRC bash
+fd --hidden
+#+END_SRC
+
+- Note that if you are in a ~git~ directory, this shows all files in
+  the directory ~.git/~ but skip the files ignored by ~.gitignore~
+  file.
+
+- If you want to include all hidden files in your ~fd~ search but
+  exclude files in the ~.git/~ directory, run the command:
+
+#+BEGIN_SRC bash
+fd --hidden --exclude '.git/*'
+#+END_SRC
+
+*** With fd, how to find every file entries?
+- Use ~--hidden~ and ~--no-ignore~ option of ~fd~ command.
+- ~fd~: find entries in the filesystem.
+- See [[https://github.com/sharkdp/fd][fd]] repository.
+- If you want to include every file entries in your ~fd~ search, run
+  the command:
+
+#+BEGIN_SRC bash
+fd --hidden --no-ignore
+#+END_SRC
+
+*** With fd, how to restrict the search to the directories?
+- Use ~--type~ option of ~fd~ command.
+- ~fd~: find entries in the filesystem.
+- See [[https://github.com/sharkdp/fd][fd]] repository.
+- If you want to restrict your ~fd~ search to the directories, run the
+  command:
+
+#+BEGIN_SRC bash
+fd --type d
+#+END_SRC
+
+*** With fd, how to restrict the search to the file only?
+- Use ~--type~ option of ~fd~ command.
+- ~fd~: find entries in the filesystem.
+- See [[https://github.com/sharkdp/fd][fd]] repository.
+- If you want to restrict your ~fd~ search to the files only, run the
+  command:
+
+#+BEGIN_SRC bash
+fd --type f
+#+END_SRC
+
 ** Directories
 *** How can I list the directories first when using ls?
 - Use ~--group-directories-first~ flag of ~ls~ command.
@@ -1056,6 +1240,19 @@ brew install watchman
 inotifywait -qq -e open path/to/watched-file && echo "hello world"
 #+END_SRC
 
+** Redirection
+*** What does 2>&1 mean in a command line?
+- Redirect the standard error ~stderr~ (the file descriptor 2) to
+  the standard output ~stdout~ (the file descriptor 1). You can
+  consider ~>&~ as a redirect merger operator.
+- See [[https://stackoverflow.com/questions/818255/in-the-shell-what-does-21-mean][stackoverflow]].
+- So if you have a command line ~my-command~ that send error to
+  ~stderr~ and you want to catch the errors on ~stdout~, run this
+  command:
+
+#+BEGIN_SRC bash
+my-command 2>&1
+#+END_SRC
 * Network
 ** DNS
 *** How to get information of an url ?
@@ -1269,7 +1466,7 @@ Host *
 #+END_SRC
 
 *** How can I start ssh-agent on login?
-- Use ~systemd~ by adding a user sytemd unit for ~ssh-agent~.
+- Use ~systemd~ by adding a user systemd unit for ~ssh-agent~.
 - See [[https://stackoverflow.com/questions/18880024/start-ssh-agent-on-login][start-ssh-agent-on-login]] on stackoverflow.
 - If you want to start ~ssh-agent~ on login, you have to add a
   ~ssh-agent.service~ user systemd unit, export ~SSH_AUTH_SOCK~
@@ -1449,7 +1646,7 @@ server {
 - See ~proxy_pass~ directive in your ~block~ configuration.
 - The error was that I was trying to pass ~location /app~ to
   the address ~http://127.0.0.1:5000~ without putting a ~/~ a the
-  end of the address. 
+  end of the address.
 -To solve the problem, I add a ~/~ to the ~proxy_pass~ address. My
 ~block~ configuration ~/etc/nginx/sites-available/mydomain.conf~
 contains know the following lines:
@@ -2657,6 +2854,18 @@ printenv
 
 #+BEGIN_SRC bash
 dircolors --print-database
+#+END_SRC
+
+** Ubuntu
+*** How to check your ubuntu version?
+- Use ~lsb_release~ command.
+- ~lsb_release~: Print distribution-specific information.
+- See [[https://linuxize.com/post/how-to-check-your-ubuntu-version/][linuxize]].
+- If you want to know your Ubuntu distribution version, run the
+  command:
+
+#+BEGIN_SRC bash
+lsb_release -d
 #+END_SRC
 `;
 
