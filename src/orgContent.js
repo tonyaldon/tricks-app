@@ -1535,6 +1535,18 @@ Host *
 browser-sync start --reload-delay=1000 -w --server
 #+END_SRC
 
+- If the browser tab doesn't refresh automatically when you modify files,
+  then you have to add a snippet into your website, just before the
+  closing ~</body>~ tag. If you run ~browser-sync start~ command
+  line, this prints the snippet you have to add to your ~index.html~
+  file. When I did, this gave me that snippet:
+
+#+BEGIN_SRC html
+<script id="__bs_script__">//<![CDATA[
+document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.26.13'><\/script>".replace("HOST", location.hostname));
+//]]></script>
+#+END_SRC
+
 - If you want to install ~browser-sync~, run the command:
 
 #+BEGIN_SRC bash
