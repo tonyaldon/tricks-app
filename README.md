@@ -1,7 +1,14 @@
+# NO LONGER MAINTAINED
+
+Last time I made a change in this repository was on 2020-11-17.
+
+I will not make any changes in the future.
+
+https://tricks.tonyaldon.com/ is always in activity.
+
 # About
 
-`tricks-app` repository holds the code off the web application
-[tricks](https://tricks.tonyaldon.com/).
+`tricks-app` repository holds the code off https://tricks.tonyaldon.com/ .
 
 I just gather some `problems/questions/errors` I had to figure out to
 setup my linux environment and to feel at home using linux.
@@ -11,8 +18,6 @@ The app takes the form of a Q&A.
 So far the app contains 166 questions on `gtk`, `rsync`, `i3`, `ssh`,
 `fonts`, `usb drives`, `symbolic links`, `watching files`, `CPU`,
 `RAM`, `sudo`, ....
-
-You can find all my notes on computing [here](https://github.com/tonyaldon/tricks).
 
 <img src="tricks.png" alt="Tricks app by Tony Aldon" title="Tricks App by Tony Aldon">
 
