@@ -1,14 +1,12 @@
 # NO LONGER MAINTAINED
 
-Last time I made a change in this repository was on 2020-11-17.
+Last time I made a change on the deployed web page was on 2020-11-17.
 
 I will not make any changes in the future.
 
-https://tricks.tonyaldon.com/ is always in activity.
+Browse at https://tonyaldon.com/tricks/ .
 
 # About
-
-`tricks-app` repository holds the code off https://tricks.tonyaldon.com/ .
 
 I just gather some `problems/questions/errors` I had to figure out to
 setup my linux environment and to feel at home using linux.
